@@ -1,6 +1,8 @@
 # hadoop fs -put CO2.csv input
 
 # pyspark --master "local[2]"
+%pip install pyspark
+
 from pyspark import SparkContext
 
 sc = SparkContext("local[2]", "TransformationCO2")
