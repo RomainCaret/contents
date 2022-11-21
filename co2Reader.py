@@ -39,5 +39,8 @@ rddmean = rdd8.map(lambda x: x[2]).filter(lambda x: x != '-')
 mean = rddmean.mean()
 res = rdd8.map(lambda x: (x[0], x[1], valToMean(x[2], mean), x[3], x[4]))
 
-# 3. Save the result in multiple files
-res.saveAsTextFile('output/TransformationCO2')
+# 3. Transform the rows into strings
+resInString = res.map(lambda x: str(x[0]) + ',' + x[1] + ',' + str(x[2]) + ',' + str(x[3]) + ',' + str(x[4]))
+
+# 4. Save the result in multiple files
+resInString.saveAsTextFile('output/TransformationCO2')
