@@ -1,7 +1,6 @@
 # hadoop fs -put CO2.csv input
 
 # pyspark --master "local[2]"
-%pip install pyspark
 
 from pyspark import SparkContext
 
@@ -33,5 +32,5 @@ rddmean = rdd7.map(lambda x: x[2]).filter(lambda x: x != '-')
 mean = rddmean.mean()
 res = rdd7.map(lambda x: (x[0], x[1], valToMean(x[2], mean), x[3], x[4]))
 
-res.saveAsTextFile('output')
+res.saveAsTextFile('output/co2Clean.csv')
 
