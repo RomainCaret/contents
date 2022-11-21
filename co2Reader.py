@@ -24,7 +24,8 @@ co2 = sc.textFile('input/CO2.csv')
 rdd0 = co2.map(lambda x: x.split(","))
 
 # 1. Replace the problematic characters 
-rdd1 = rdd0.map(lambda x: [elem.replace('Ã', 'à') for elem in x])
+rdd0 = co2.map(lambda x: x.replace('Ã  aimant permanent,', 'à aimant permanent'))
+rdd1 = rdd0.map(lambda x: x.split(","))
 rdd2 = rdd1.map(lambda x: [elem.replace('\xa0', '') for elem in x])
 rdd3 = rdd2.map(lambda x: [elem.replace('Ã©', 'é') for elem in x])
 rdd4 = rdd3.map(lambda x: [elem.replace('€1', '€') for elem in x])
@@ -40,4 +41,3 @@ res = rdd8.map(lambda x: (x[0], x[1], valToMean(x[2], mean), x[3], x[4]))
 
 # 3. Save the result in multiple files
 res.saveAsTextFile('output/TransformationCO2')
-
